@@ -5,35 +5,18 @@ const users = require("./users");
 const express = require("express");
 const app = express();
 
-app.get("/", (req, res) => res.send("Hello World"));
+app.get("/", (req, res) => res.send("This is home page"));
 app.get("/about", (req, res) =>
   res.status(200).json({
     status: "success",
-    message: "About page",
-    data: [],
+    message: "response success",
+    description: "Exercise 3",
+    date: moment().format("MMMM Do YYYY, h:mm:ss a"),
   })
 );
 
-app.post("/contoh", (req, res) => {
-  res.send("request dengan method POST");
-});
-app.put("/contoh", (req, res) => {
-  res.send("request dengan method PUT");
-});
-app.delete("/contoh", (req, res) => {
-  res.send("request dengan method DELETE");
-});
-app.all("/universal", function (req, res) {
-  res.send("request dengan method " + req.method); // menggunakan semua metode
-}); // Routing dinamis
-// 1. menggunakan params
-app.get("/post/:id", (req, res) => {
-  res.send("artikel-" + req.params.id); // routing dinamis menggunakan params
-});
-// 2. Menggunakan Query String
-app.get("/post", (req, res) => {
-  const { page, sort } = req.query;
-  res.send(`Query String = page : ${page} , sort : ${sort}`);
+app.get("/users", (req, res) => {
+  res.send(users);
 });
 
 const hostname = "127.0.0.1";

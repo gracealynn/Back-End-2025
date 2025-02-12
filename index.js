@@ -25,9 +25,15 @@ app.delete("/contoh", (req, res) => {
 });
 app.all("/universal", function (req, res) {
   res.send("request dengan method " + req.method); // menggunakan semua metode
-});
+}); // Routing dinamis
+// 1. menggunakan params
 app.get("/post/:id", (req, res) => {
   res.send("artikel-" + req.params.id); // routing dinamis menggunakan params
+});
+// 2. Menggunakan Query String
+app.get("/post", (req, res) => {
+  const { page, sort } = req.query;
+  res.send(`Query String = page : ${page} , sort : ${sort}`);
 });
 
 const hostname = "127.0.0.1";

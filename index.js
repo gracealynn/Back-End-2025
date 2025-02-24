@@ -1,26 +1,35 @@
 const http = require("http");
 const { hello, greetings } = require("./helloWorld");
 const moment = require("moment");
-const users = require("./users");
+// const users = require("./users");
 const express = require("express");
 const app = express();
+const routers = require("./routers");
+const morgan = require("morgan");
 
-app.get("/", (req, res) => res.send("This is home page"));
-app.get("/users", (req, res) => {
-  res.send(users);
-});
+app.use(morgan("tiny"));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.get("/users/:name", (req, res) => {
-  const name = req.params.name.toLowerCase();
-  const user = users.find((data) => data.name.toLowerCase() === name);
-  if (!user) {
-    return res.status(404).json({
-      message: "Data user tidak ditemukan",
-    });
-  }
+// app.get("/", (req, res) => res.send("This is home page"));
+// app.get("/users", (req, res) => {
+//   res.send(users);
+// });
 
-  res.status(200).json({ user });
-});
+// app.get("/users/:name", (req, res) => {
+//   const name = req.params.name.toLowerCase();
+//   const user = users.find((data) => data.name.toLowerCase() === name);
+//   if (!user) {
+//     return res.status(404).json({
+//       message: "Data user tidak ditemukan",
+//     });
+//   }
+
+//   res.status(200).json({ user });
+// });
+
+//routing
+app.use(routers);
 
 app.use((req, res, next) => {
   res.status(404).json({

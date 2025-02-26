@@ -1,6 +1,26 @@
 const express = require("express");
 const users = require("./users");
 const routers = express.Router();
+const path = require("path");
+
+// routers.get("/download", function (req, res) {
+//   const filename = "gojek.png";
+//   res.sendFile(__dirname + "/download" + filename);
+// });
+
+// routers.get("/download", function (req, res) {
+//   const filename = "gojek.png";
+//   res.sendFile(path.join(__dirname, "/download", filename), {
+//     headers: {
+//       "Content-Disposition": 'attachment; filename="gojek-photo.png',
+//     },
+//   });
+// });
+
+routers.get("/download", function (req, res) {
+  const filename = "gojek.png";
+  res.download(path.join(__dirname, "/download", filename), "gojek-photo.png");
+});
 
 routers.get("/", (req, res) => res.send("Hello World"));
 routers.get("/login", (req, res) => {

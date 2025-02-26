@@ -6,10 +6,12 @@ const express = require("express");
 const app = express();
 const routers = require("./routers");
 const morgan = require("morgan");
+const path = require("path");
 
 app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
 
 // app.get("/", (req, res) => res.send("This is home page"));
 // app.get("/users", (req, res) => {

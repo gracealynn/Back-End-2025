@@ -8,6 +8,7 @@ const routers = require("./routers");
 const morgan = require("morgan");
 const path = require("path");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: true }));
@@ -39,6 +40,15 @@ app.use(
 
 //routing
 app.use(routers);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+// parse JSON
+app.use(bodyParser.json());
+
+app.post("/users", (req, res) => {
+  const { username, password } = req.body;
+  res.send(`Anda login dengan username ${username} dan password ${password}`);
+});
 
 app.use((req, res, next) => {
   res.status(404).json({

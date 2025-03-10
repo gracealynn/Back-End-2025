@@ -23,7 +23,17 @@ routers.get("/download", function (req, res) {
 });
 
 routers.get("/", (req, res) => res.send("Hello World"));
-routers.get("/login", (req, res) => {
+routers.get("/login1", (req, res) => {
+  const { username, password } = req.body;
+  res.status(200).json({
+    status: "success",
+    data: {
+      username: username,
+      password: password,
+    },
+  });
+});
+routers.put("/login", (req, res) => {
   const { username, password } = req.body;
   res.status(200).json({
     status: "success",

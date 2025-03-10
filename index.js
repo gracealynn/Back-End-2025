@@ -7,11 +7,18 @@ const app = express();
 const routers = require("./routers");
 const morgan = require("morgan");
 const path = require("path");
+const cors = require("cors");
 
 app.use(morgan("tiny"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  cors({
+    origin: "http://127.0.0.1:5500",
+    methods: ["GET", "PUT"],
+  })
+);
 
 // app.get("/", (req, res) => res.send("This is home page"));
 // app.get("/users", (req, res) => {
